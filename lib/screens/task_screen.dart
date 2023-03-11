@@ -5,8 +5,45 @@ import 'package:my_task/models/task_data.dart';
 import 'package:my_task/screens/add_task_screen.dart';
 import 'package:my_task/widgets/tasks_list.dart';
 import 'package:provider/provider.dart';
+import 'package:my_task/widgets/notification.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+
+
+
+
+class DatePickerTxt extends StatefulWidget {
+  const DatePickerTxt({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<DatePickerTxt> createState() => _DatePickerTxtState();
+}
+
+class _DatePickerTxtState extends State<DatePickerTxt> {
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        DatePicker.showDateTimePicker(
+          context,
+          showTitleActions: true,
+          onChanged: (date) => scheduleTime = date,
+          onConfirm: (date) {},
+        );
+      },
+      child: const Text(
+        'Select Date Time',
+        style: TextStyle(color: Colors.blue),
+      ),
+    );
+  }
+}
 
 class TasksScreen extends StatelessWidget {
+  const TasksScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
