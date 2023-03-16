@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:my_task/widgets/notification.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-
 DateTime scheduleTime = DateTime.now();
+
 class DatePickerTxt extends StatefulWidget {
   const DatePickerTxt({
     Key? key,
@@ -57,7 +57,7 @@ class _TasksScreen_v1State extends State<TasksScreen_v1> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: StreamBuilder<List<Task>>(
             stream: TaskData().listTodos(),
             builder: (context, snapshot) {
@@ -78,11 +78,11 @@ class _TasksScreen_v1State extends State<TasksScreen_v1> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 15),
                     Divider(
                       color: Colors.grey[600],
                     ),
-                    SizedBox(height: 40),
+                    SizedBox(height: 10),
                     ListView.separated(
                       separatorBuilder: (context, index) => Divider(
                         color: Colors.grey[800],
@@ -124,10 +124,11 @@ class _TasksScreen_v1State extends State<TasksScreen_v1> {
                             title: Text(
                               todos[index].name,
                               style: TextStyle(
-                                decoration: todos[index].isDone
+                                decoration: (todos[index].isDone)
                                     ? TextDecoration.lineThrough
                                     : null,
                                 fontSize: 20,
+                                decorationStyle: TextDecorationStyle.wavy,
                                 color: Colors.grey[200],
                                 fontWeight: FontWeight.w600,
                               ),
@@ -205,12 +206,10 @@ class _TasksScreen_v1State extends State<TasksScreen_v1> {
                     child: Text("Add"),
                     color: Theme.of(context).primaryColor,
                     textColor: Colors.white,
-                    onPressed: ()
-                    async {
+                    onPressed: () async {
                       if (todoTitleController.text.isNotEmpty) {
-
-                        await TaskData()
-                            .addTask(todoTitleController.text.trim(),scheduleTime);
+                        await TaskData().addTask(
+                            todoTitleController.text.trim(), scheduleTime);
                         Navigator.pop(context);
                       }
                     },

@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
         }
         return MaterialApp(
           debugShowCheckedModeBanner: false,
+
           home: const TasksScreen_v1(),
           theme: ThemeData(
             scaffoldBackgroundColor: Colors.grey[900],

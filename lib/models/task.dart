@@ -4,7 +4,7 @@ class Task {
   final String name;
   bool isDone;
 
-  Task({required this.name, this.isDone = true, required this.uid});
+  Task({required this.name, required this.isDone, required this.uid});
 
   void doneChange() {
     isDone = !isDone;
